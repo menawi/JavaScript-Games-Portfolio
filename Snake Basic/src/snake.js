@@ -7,6 +7,9 @@ class SnakeGame {
     this.draw();
   }
 
+  // construct the Game object using canvasId from HTML as the parameter :
+  // canvas, ctx, snake, draw()
+
   draw() {
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -16,6 +19,12 @@ class SnakeGame {
 
 
   }
+
+  // draw function 
+  // clear the rectangle(x,y,w,h)
+  // move snake
+  // draw snake 
+  // animate  
 
 }
 

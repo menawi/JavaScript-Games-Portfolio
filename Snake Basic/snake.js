@@ -64,15 +64,49 @@ class Snake {
 
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'lightgreen';
+
     for (let i = 0; i < this.body.length; i++) {
       ctx.fillRect(this.body[i].x * resolution, this.body[i].y * resolution, resolution, resolution);
     }
+    // for each part of the snake body array, render it , and render the entire resoulution context (10px per cube)
+
+    // 👆There are actually TWO things happening here :
+    // 1. We are rendenring the _location_ of the snake array body part 
+    // 2. We are modifying the rendering _size_ of that body part 
+
     ctx.fillStyle = 'red';
     ctx.fillRect(this.food.x * resolution, this.food.y * resolution, resolution, resolution);
+
+    // same as snake rendering concept
+
+    // Set line width and color
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "gray";
+
+    // Draw vertical lines
+    for (let x = 0; x <= canvas.width; x += resolution) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    // Draw horizontal lines
+    for (let y = 0; y <= canvas.height; y += resolution) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+
   }
+
 }
 
+
+// new instance of Snake
 const snake = new Snake();
 
 window.addEventListener('keydown', (e) => {
@@ -96,6 +130,10 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+// 👉 axis awareness :: 
+//  X [ right = +  , left = - ]
+// Y [ up = -, down = +]
+
 function loop() {
   snake.update();
   snake.draw();
@@ -103,7 +141,14 @@ function loop() {
 
 // setInterval(loop, 100);
 
-loop()
+// loop()
+
+window.onload(requestAnimationFrame(
+  setInterval(loop, 100)
+)
+)
+
+
 
 
 // This code creates a simple Snake game using the `canvas` element and its `2d` context. The `Snake` class defines the behavior of the snake and its food. The `update` method updates the position of the snake and checks if it has eaten the food. The `draw` method draws the snake and the food on the canvas. The `keydown` event listener allows the user to control the direction of the snake using the arrow keys. The `loop` function calls the `update` and `draw` methods at a regular interval to animate the game.

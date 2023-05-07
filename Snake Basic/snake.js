@@ -1,6 +1,4 @@
-// Sure! Here's a simple Snake game written in JavaScript:
-
-// canvas
+// 📍canvas
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -9,12 +7,12 @@ canvas.width = 400;
 canvas.height = 400;
 
 
-// snake object
+// 📍snake object
 class Snake {
   constructor() {
     this.length = 1;
-    this.body = [{ x: 100, y: 10 }];
-    // 👆 this is where the snake buddy starts, at +10 from the left of the border, and from +10 above the centre of the border. It is an array with one index and two inner values.
+    this.body = [{ x: 10, y: 10 }];
+    // 👆 this is where the snake body starts, at +10 from the left of the border, and from +10 above the centre of the border. It is an array with one index and two inner values.
 
     // as the snake grows, it becomes an array of objects, each object with its own x and y coordinates. [ {} , {} , {} , {}  ]
     this.velX = 1;
@@ -22,8 +20,12 @@ class Snake {
     this.food = { x: 20, y: 20 };
   }
 
+  //  📍this is the snake's movement function. It controls the movement of the snake body.
   update() {
     let head = { x: this.body[0].x + this.velX, y: this.body[0].y + this.velY };
+    // 👉 this means that no matter how many new additions to this array are made (as the snake grows, more {x,y} are added to it) , the first index of snake array will alway be considered the head
+
+    // 👉 let headIndex = snakeBodyArray[0]
 
     // if snake goes beyond the right-side boundary
     if (head.x < 0) {
@@ -54,13 +56,17 @@ class Snake {
 
     // 👆 if position of snake intersects positoiin of food , then +1 to the snake length. 
     // set food to new random position 
-
+    // 📍
     while (this.body.length > this.length) {
       this.body.pop();
     }
     // 👆 new snake-body-array length = 2 , which is greater than 1 , simulate the snake moving by "popping" the last object in the array 
 
   }
+
+  // end of update function //
+
+  // draw function that renders the game
 
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
